@@ -1,4 +1,5 @@
 import PIL
+from PIL import Image
 import customtkinter
 from contact_type import ContactType
 from psn_evaluator import PSNEvaluator
