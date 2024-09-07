@@ -93,13 +93,24 @@ class PSNPreliminary:
         self.button_persistence_HB = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 35), command=self.browse_persistence_file_HB, width=150, height=40, fg_color="gray30")
         self.button_persistence_HB.grid(row=6, column=2, padx=10, pady=10)
 
+        # Checkbox per generare Macro IIN e Plot
+        self.macro_iin_var = ctk.IntVar()
+        self.checkbox_macro_iin = ctk.CTkCheckBox(self.frame, text="Generate Macro IIN", font=("Helvetica", 35),
+                                                  variable=self.macro_iin_var, text_color="black")
+        self.checkbox_macro_iin.grid(row=7, column=0, padx=10, pady=10)
+
+        self.plot_var = ctk.IntVar()
+        self.checkbox_plot = ctk.CTkCheckBox(self.frame, text="Generate Plot", font=("Helvetica", 35),
+                                             variable=self.plot_var, text_color="black")
+        self.checkbox_plot.grid(row=7, column=1, padx=10, pady=10)
+
         # Pulsante per avviare il processo
         self.button_process = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 35), command=self.process_files, width=150, height=40, fg_color="gray30")
-        self.button_process.grid(row=7, column=0, columnspan=3, pady=20)
+        self.button_process.grid(row=8, column=0, columnspan=3, pady=20)
 
         # Label per il risultato
         self.label_result = ctk.CTkLabel(self.frame, text="", font=("Helvetica", 35))
-        self.label_result.grid(row=8, column=0, columnspan=3, pady=10)
+        self.label_result.grid(row=9, column=0, columnspan=3, pady=10)
 
         # Valori di default
         self.min_value = 0.0
@@ -208,23 +219,13 @@ class PSNPreliminary:
             # Apply boolean OR
             combined_matrix = np.logical_or.reduce([adj_matrix_SB, adj_matrix_HC, adj_matrix_HB])
 
-            # Save combined_matrix as .dat file (adjacency matrix)
-            dat_output_path = os.path.join(output_folder, f"{base_name}_macroIIN.dat")
-            self.generate_psn_dat(combined_matrix, dat_output_path)
+            # Controlliamo lo stato delle checkbox e chiamiamo i metodi corrispondenti
+            if self.macro_iin_var.get():
+                self.create_macro_iin(combined_matrix, base_name, output_folder)
 
-            # Generate graph
-            combined_graph = nx.from_numpy_array(combined_matrix)
-
-            # Save graph to .gml
-            gml_output_path = os.path.join(output_folder, f"{base_name}_macroIIN.gml")
-            nx.write_gml(combined_graph, gml_output_path)
-
-            # Plot the graph
-            png_output_path = os.path.join(output_folder, f"{base_name}_macroIIN.png")
-            self.plot_graph(combined_graph, png_output_path)
-
-            # Plot sigmoid-like graph
-            self.plot_clusters_vs_threshold(combined_graph, output_folder, base_name)
+            if self.plot_var.get():
+                combined_graph = nx.from_numpy_array(combined_matrix)
+                self.create_plot(combined_graph, base_name, output_folder)
 
             self.label_result.configure(text="Processing complete.", text_color="green")
 
@@ -283,6 +284,25 @@ class PSNPreliminary:
         plot_output_path = os.path.join(output_folder, f"{base_name}_cluster_vs_pmin.png")
         plt.savefig(plot_output_path)
         plt.close()
+
+    def create_plot(self, graph, base_name, output_folder):
+        # Salviamo il grafico in formato .png
+        png_output_path = os.path.join(output_folder, f"{base_name}_macroIIN.png")
+        self.plot_graph(graph, png_output_path)
+
+        # Plot sigmoid-like graph
+        self.plot_clusters_vs_threshold(graph, output_folder, base_name)
+
+    def create_macro_iin(self, combined_matrix, base_name, output_folder):
+        # Salviamo la matrice combinata come file .dat
+        dat_output_path = os.path.join(output_folder, f"{base_name}_macroIIN.dat")
+        self.generate_psn_dat(combined_matrix, dat_output_path)
+
+        # Generiamo e salviamo il grafo in formato .gml
+        combined_graph = nx.from_numpy_array(combined_matrix)
+        gml_output_path = os.path.join(output_folder, f"{base_name}_macroIIN.gml")
+        nx.write_gml(combined_graph, gml_output_path)
+
 
 if __name__ == "__main__":
     root = ctk.CTk()
