@@ -58,7 +58,7 @@ class PSNPreliminary:
         self.checkbox_threshold = ctk.CTkCheckBox(self.frame, text="Use manual threshold", font=("Helvetica", 40), variable=self.threshold_var, text_color="black")
         self.checkbox_threshold.grid(row=3, column=0, padx=10, pady=10)
 
-        self.label_threshold = ctk.CTkLabel(self.frame, text="Threshold:", font=("Helvetica", 50), text_color="black")
+        self.label_threshold = ctk.CTkLabel(self.frame, text="Threshold:", font=("Helvetica", 40), text_color="black")
         self.label_threshold.grid(row=3, column=1, padx=10, pady=10)
 
         self.entry_threshold = ctk.CTkEntry(self.frame, width=200, height=40, font=("Helvetica", 40))
@@ -69,7 +69,7 @@ class PSNPreliminary:
         self.label_persistence_SB = ctk.CTkLabel(self.frame, text="Persistence matrix SB:", font=("Helvetica", 50), text_color="black")
         self.label_persistence_SB.grid(row=4, column=0, padx=10, pady=10)
 
-        self.entry_persistence_SB = ctk.CTkEntry(self.frame, width=250, height=40, font=("Helvetica", 40))
+        self.entry_persistence_SB = ctk.CTkEntry(self.frame, width=200, font=("Helvetica", 40))
         self.entry_persistence_SB.grid(row=4, column=1, padx=10, pady=10)
 
         self.button_persistence_SB = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 40), command=self.browse_persistence_file_SB, width=200, height=40, fg_color="gray30")
@@ -78,7 +78,7 @@ class PSNPreliminary:
         self.label_persistence_HC = ctk.CTkLabel(self.frame, text="Persistence matrix HC:", font=("Helvetica", 50), text_color="black")
         self.label_persistence_HC.grid(row=5, column=0, padx=10, pady=10)
 
-        self.entry_persistence_HC = ctk.CTkEntry(self.frame, width=250, height=40, font=("Helvetica", 40))
+        self.entry_persistence_HC = ctk.CTkEntry(self.frame, width=200, font=("Helvetica", 40))
         self.entry_persistence_HC.grid(row=5, column=1, padx=10, pady=10)
 
         self.button_persistence_HC = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 40), command=self.browse_persistence_file_HC, width=200, height=40, fg_color="gray30")
@@ -87,7 +87,7 @@ class PSNPreliminary:
         self.label_persistence_HB = ctk.CTkLabel(self.frame, text="Persistence matrix HB:", font=("Helvetica", 50), text_color="black")
         self.label_persistence_HB.grid(row=6, column=0, padx=10, pady=10)
 
-        self.entry_persistence_HB = ctk.CTkEntry(self.frame, width=250, height=40, font=("Helvetica", 40))
+        self.entry_persistence_HB = ctk.CTkEntry(self.frame, width=200, font=("Helvetica", 40))
         self.entry_persistence_HB.grid(row=6, column=1, padx=10, pady=10)
 
         self.button_persistence_HB = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 40), command=self.browse_persistence_file_HB, width=200, height=40, fg_color="gray30")
