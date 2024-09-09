@@ -15,53 +15,53 @@ class PSNPreliminary:
         ctk.set_default_color_theme("blue")
 
         # Frame esterno con bordo
-        self.outer_frame = ctk.CTkFrame(root, border_color="black", border_width=2, fg_color="lightblue")
+        self.outer_frame = ctk.CTkFrame(root, border_color="black", border_width=2, fg_color="orange")
         self.outer_frame.pack(expand=True, fill='both', padx=10, pady=10)
 
         # Frame interno per il posizionamento dei widget
-        self.frame = ctk.CTkFrame(self.outer_frame, fg_color="lightblue")
+        self.frame = ctk.CTkFrame(self.outer_frame, fg_color="orange")
         self.frame.pack(expand=True, padx=10, pady=10)
 
         # Valori Min, Max e Step per il filtraggio
         self.label_min = ctk.CTkLabel(self.frame, text="Minimum value:", font=("Helvetica", 50), text_color="black")
         self.label_min.grid(row=0, column=0, padx=10, pady=10)
 
-        self.entry_min = ctk.CTkEntry(self.frame, width=150, height=40, font=("Helvetica", 20))
+        self.entry_min = ctk.CTkEntry(self.frame, width=200, height=40, font=("Helvetica", 40))
         self.entry_min.grid(row=0, column=1, padx=10, pady=10)
         self.entry_min.insert(0, "0.0")
 
-        self.button_min = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 35), command=self.update_min, width=150, height=40, fg_color="gray30")
+        self.button_min = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 40), command=self.update_min, width=200, height=40, fg_color="gray30")
         self.button_min.grid(row=0, column=2, padx=10, pady=10)
 
         self.label_max = ctk.CTkLabel(self.frame, text="Maximum value:", font=("Helvetica", 50), text_color="black")
         self.label_max.grid(row=1, column=0, padx=10, pady=10)
 
-        self.entry_max = ctk.CTkEntry(self.frame, width=150, height=40, font=("Helvetica", 20))
+        self.entry_max = ctk.CTkEntry(self.frame, width=200, height=40, font=("Helvetica", 40))
         self.entry_max.grid(row=1, column=1, padx=10, pady=10)
         self.entry_max.insert(0, "100.0")
 
-        self.button_max = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 35), command=self.update_max, width=150, height=40, fg_color="gray30")
+        self.button_max = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 40), command=self.update_max, width=200, height=40, fg_color="gray30")
         self.button_max.grid(row=1, column=2, padx=10, pady=10)
 
         self.label_step = ctk.CTkLabel(self.frame, text="Step value:", font=("Helvetica", 50), text_color="black")
         self.label_step.grid(row=2, column=0, padx=10, pady=10)
 
-        self.entry_step = ctk.CTkEntry(self.frame, width=150, height=40, font=("Helvetica", 20))
+        self.entry_step = ctk.CTkEntry(self.frame, width=200, height=40, font=("Helvetica", 40))
         self.entry_step.grid(row=2, column=1, padx=10, pady=10)
         self.entry_step.insert(0, "5.0")
 
-        self.button_step = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 35), command=self.update_step, width=150, height=40, fg_color="gray30")
+        self.button_step = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 40), command=self.update_step, width=200, height=40, fg_color="gray30")
         self.button_step.grid(row=2, column=2, padx=10, pady=10)
 
         # Checkbox per soglia manuale
         self.threshold_var = ctk.IntVar()
-        self.checkbox_threshold = ctk.CTkCheckBox(self.frame, text="Use manual threshold", font=("Helvetica", 35), variable=self.threshold_var, text_color="black")
+        self.checkbox_threshold = ctk.CTkCheckBox(self.frame, text="Use manual threshold", font=("Helvetica", 40), variable=self.threshold_var, text_color="black")
         self.checkbox_threshold.grid(row=3, column=0, padx=10, pady=10)
 
         self.label_threshold = ctk.CTkLabel(self.frame, text="Threshold:", font=("Helvetica", 50), text_color="black")
         self.label_threshold.grid(row=3, column=1, padx=10, pady=10)
 
-        self.entry_threshold = ctk.CTkEntry(self.frame, width=150, height=40, font=("Helvetica", 20))
+        self.entry_threshold = ctk.CTkEntry(self.frame, width=200, height=40, font=("Helvetica", 40))
         self.entry_threshold.grid(row=3, column=2, padx=10, pady=10)
         self.entry_threshold.insert(0, "0.5")
 
@@ -69,48 +69,48 @@ class PSNPreliminary:
         self.label_persistence_SB = ctk.CTkLabel(self.frame, text="Persistence matrix SB:", font=("Helvetica", 50), text_color="black")
         self.label_persistence_SB.grid(row=4, column=0, padx=10, pady=10)
 
-        self.entry_persistence_SB = ctk.CTkEntry(self.frame, width=250, height=40, font=("Helvetica", 20))
+        self.entry_persistence_SB = ctk.CTkEntry(self.frame, width=250, height=40, font=("Helvetica", 40))
         self.entry_persistence_SB.grid(row=4, column=1, padx=10, pady=10)
 
-        self.button_persistence_SB = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 35), command=self.browse_persistence_file_SB, width=150, height=40, fg_color="gray30")
+        self.button_persistence_SB = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 40), command=self.browse_persistence_file_SB, width=200, height=40, fg_color="gray30")
         self.button_persistence_SB.grid(row=4, column=2, padx=10, pady=10)
 
         self.label_persistence_HC = ctk.CTkLabel(self.frame, text="Persistence matrix HC:", font=("Helvetica", 50), text_color="black")
         self.label_persistence_HC.grid(row=5, column=0, padx=10, pady=10)
 
-        self.entry_persistence_HC = ctk.CTkEntry(self.frame, width=250, height=40, font=("Helvetica", 20))
+        self.entry_persistence_HC = ctk.CTkEntry(self.frame, width=250, height=40, font=("Helvetica", 40))
         self.entry_persistence_HC.grid(row=5, column=1, padx=10, pady=10)
 
-        self.button_persistence_HC = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 35), command=self.browse_persistence_file_HC, width=150, height=40, fg_color="gray30")
+        self.button_persistence_HC = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 40), command=self.browse_persistence_file_HC, width=200, height=40, fg_color="gray30")
         self.button_persistence_HC.grid(row=5, column=2, padx=10, pady=10)
 
         self.label_persistence_HB = ctk.CTkLabel(self.frame, text="Persistence matrix HB:", font=("Helvetica", 50), text_color="black")
         self.label_persistence_HB.grid(row=6, column=0, padx=10, pady=10)
 
-        self.entry_persistence_HB = ctk.CTkEntry(self.frame, width=250, height=40, font=("Helvetica", 20))
+        self.entry_persistence_HB = ctk.CTkEntry(self.frame, width=250, height=40, font=("Helvetica", 40))
         self.entry_persistence_HB.grid(row=6, column=1, padx=10, pady=10)
 
-        self.button_persistence_HB = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 35), command=self.browse_persistence_file_HB, width=150, height=40, fg_color="gray30")
+        self.button_persistence_HB = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 40), command=self.browse_persistence_file_HB, width=200, height=40, fg_color="gray30")
         self.button_persistence_HB.grid(row=6, column=2, padx=10, pady=10)
 
         # Checkbox per generare Macro IIN e Plot
         self.macro_iin_var = ctk.IntVar()
-        self.checkbox_macro_iin = ctk.CTkCheckBox(self.frame, text="Generate Macro IIN", font=("Helvetica", 35),
+        self.checkbox_macro_iin = ctk.CTkCheckBox(self.frame, text="Generate Macro IIN", font=("Helvetica", 40),
                                                   variable=self.macro_iin_var, text_color="black")
         self.checkbox_macro_iin.grid(row=7, column=0, padx=10, pady=10)
 
         self.plot_var = ctk.IntVar()
-        self.checkbox_plot = ctk.CTkCheckBox(self.frame, text="Generate Plot", font=("Helvetica", 35),
+        self.checkbox_plot = ctk.CTkCheckBox(self.frame, text="Generate Plot", font=("Helvetica", 40),
                                              variable=self.plot_var, text_color="black")
-        self.checkbox_plot.grid(row=7, column=1, padx=10, pady=10)
+        self.checkbox_plot.grid(row=8, column=0, padx=10, pady=10)
 
         # Pulsante per avviare il processo
-        self.button_process = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 35), command=self.process_files, width=150, height=40, fg_color="gray30")
-        self.button_process.grid(row=8, column=0, columnspan=3, pady=20)
+        self.button_process = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 40), command=self.process_files, width=200, height=40, fg_color="gray30")
+        self.button_process.grid(row=9, column=0, columnspan=3, pady=20)
 
         # Label per il risultato
-        self.label_result = ctk.CTkLabel(self.frame, text="", font=("Helvetica", 35))
-        self.label_result.grid(row=9, column=0, columnspan=3, pady=10)
+        self.label_result = ctk.CTkLabel(self.frame, text="", font=("Helvetica", 40))
+        self.label_result.grid(row=10, column=0, columnspan=3, pady=10)
 
         # Valori di default
         self.min_value = 0.0
@@ -227,7 +227,7 @@ class PSNPreliminary:
                 combined_graph = nx.from_numpy_array(combined_matrix)
                 self.create_plot(combined_graph, base_name, output_folder)
 
-            self.label_result.configure(text="Processing complete.", text_color="green")
+            self.label_result.configure(text="Processing complete.", text_color="white")
 
         except Exception as e:
             self.label_result.configure(text=f"Error: {e}", text_color="red")

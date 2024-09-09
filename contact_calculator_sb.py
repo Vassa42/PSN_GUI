@@ -11,34 +11,33 @@ class ContactCalculatorSb:
         self.output_directory = output_directory
         self.root = root
         self.root.title("Contact Calculator: Salt Bridges")  # Titolo della finestra GUI
-        self.root.configure(fg_color='#dfff00')  # Colore di sfondo della finestra
 
         # Crea un frame esterno con bordi e colore di sfondo personalizzato
-        self.outer_frame = ctk.CTkFrame(root, fg_color='#dfff00', corner_radius=10)
+        self.outer_frame = ctk.CTkFrame(root, fg_color='SteelBlue2', corner_radius=10)
         self.outer_frame.pack(expand=True, fill='both', padx=10, pady=10)
 
         # Crea un frame interno all'interno del frame esterno
-        self.frame = ctk.CTkFrame(self.outer_frame, fg_color='#dfff00')
+        self.frame = ctk.CTkFrame(self.outer_frame, fg_color='SteelBlue2')
         self.frame.pack(expand=True, padx=10, pady=10)
 
         # Sezione per inserire la distanza di cutoff per il calcolo dei contatti
-        self.label_cutOff = ctk.CTkLabel(self.frame, text="Insert the cut-off distance (A):", font=("Helvetica", 50), fg_color='#dfff00', text_color="black")
+        self.label_cutOff = ctk.CTkLabel(self.frame, text="Insert the cut-off distance (A):", font=("Helvetica", 50), fg_color='SteelBlue2', text_color="black")
         self.label_cutOff.grid(row=1, column=0, padx=10, pady=10)
 
-        self.entry_cutOff = ctk.CTkEntry(self.frame, width=200, justify="center", font=("Helvetica", 35))
+        self.entry_cutOff = ctk.CTkEntry(self.frame, width=200, justify="center", font=("Helvetica", 40))
         self.entry_cutOff.insert(0, "4.5")
-        self.entry_cutOff.grid(row=2, column=0, padx=10, pady=10)
+        self.entry_cutOff.grid(row=1, column=1, padx=10, pady=10)
 
-        self.button_cutOff = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 35), command=self.confirm_cutoff, fg_color="gray30")
-        self.button_cutOff.grid(row=2, column=1, padx=10, pady=10)
+        self.button_cutOff = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 40), command=self.confirm_cutoff, fg_color="gray30", width=200)
+        self.button_cutOff.grid(row=1, column=2, padx=10, pady=10)
 
         # Bottone per avviare il processo di calcolo
-        self.button_process = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 35), command=self.preprocess_file, fg_color="gray30")
-        self.button_process.grid(row=3, column=0, columnspan=3, pady=20)
+        self.button_process = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 40), command=self.preprocess_file, fg_color="gray30", width=200)
+        self.button_process.grid(row=2, column=0, columnspan=3, pady=20)
 
         # Label per visualizzare il risultato dell'operazione (es. completamento o errore)
-        self.label_result = ctk.CTkLabel(self.frame, text="", font=("Helvetica", 35), fg_color='#dfff00', text_color="black")
-        self.label_result.grid(row=4, column=0, columnspan=3, pady=10)
+        self.label_result = ctk.CTkLabel(self.frame, text="", font=("Helvetica", 40), fg_color='SteelBlue2', text_color="black")
+        self.label_result.grid(row=3, column=0, columnspan=3, pady=10)
 
     # Funzione per confermare la distanza di cut-off inserita
     def confirm_cutoff(self):
@@ -53,9 +52,9 @@ class ContactCalculatorSb:
 
         if topology_file and trajectory_file and cutoff_distance:
             self.process_file(topology_file, trajectory_file, cutoff_distance, output_directory)  # Avvia l'elaborazione dei file
-            self.label_result.config(text="Processing completed successfully!", text_color="green")  # Mostra un messaggio di successo
+            self.label_result.configure(text="Processing completed successfully!", text_color="white")  # Mostra un messaggio di successo
         else:
-            self.label_result.config(text="Please fill all fields correctly.", text_color="red")  # Messaggio di errore se i campi non sono completi
+            self.label_result.configure(text="Please fill all fields correctly.", text_color="red")  # Messaggio di errore se i campi non sono completi
 
     # Funzione che esegue effettivamente il calcolo dei ponti salini
     def process_file(self, topology_file, trajectory_file, cutoff_distance, output_directory):
@@ -116,13 +115,13 @@ class ContactCalculatorSb:
 
         np.savetxt(persistence_matrix_file, persistence_matrix, fmt='%.1f')
 
-        self.label_result.configure(text="Files saved successfully!", text_color="green")  # Messaggio di conferma di salvataggio dei file
+        self.label_result.configure(text="Files saved successfully!", text_color="white")  # Messaggio di conferma di salvataggio dei file
 
 
 # Avvio della GUI
 if __name__ == "__main__":
     ctk.set_appearance_mode("dark")  # Imposta la modalità chiara (opzionale)
-    ctk.set_default_color_theme("green")  # Imposta il tema di default (opzionale)
+    ctk.set_default_color_theme("blue")  # Imposta il tema di default (opzionale)
 
     root = ctk.CTk()  # Usa CTk per creare la finestra principale
     app = ContactCalculatorSb(root, "topology.pdb", "trajectory.dcd", "output_directory")

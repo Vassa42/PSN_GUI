@@ -13,27 +13,27 @@ class ContactCalculatorHc:
         self.root.title("Contact calculator Hydrophobic Clusters")
 
         # Configurazione della finestra principale in modalità scura
-        self.outer_frame = ctk.CTkFrame(root, fg_color="#7fff00", corner_radius=10)
+        self.outer_frame = ctk.CTkFrame(root, fg_color="DeepSkyBlue2", corner_radius=10)
         self.outer_frame.pack(expand=True, fill='both', padx=10, pady=10)
 
-        self.frame = ctk.CTkFrame(self.outer_frame, fg_color="#7fff00")
+        self.frame = ctk.CTkFrame(self.outer_frame, fg_color="DeepSkyBlue2")
         self.frame.pack(expand=True, padx=10, pady=10)
 
         self.label_cutOff = ctk.CTkLabel(self.frame, text="Insert the cut-off distance (A):", font=("Helvetica", 50), text_color="black")
         self.label_cutOff.grid(row=1, column=0, padx=10, pady=10)
 
-        self.entry_cutOff = ctk.CTkEntry(self.frame, width=200, justify="center", font=("Helvetica", 35))
+        self.entry_cutOff = ctk.CTkEntry(self.frame, width=200, justify="center", font=("Helvetica", 40))
         self.entry_cutOff.insert(0, "5.0")
-        self.entry_cutOff.grid(row=2, column=0, padx=10, pady=10)
+        self.entry_cutOff.grid(row=1, column=1, padx=10, pady=10)
 
-        self.button_cutOff = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 35), command=self.confirm_cutoff, fg_color="gray30")
-        self.button_cutOff.grid(row=2, column=1, padx=10, pady=10)
+        self.button_cutOff = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 40), command=self.confirm_cutoff, fg_color="gray30", width=200)
+        self.button_cutOff.grid(row=1, column=2, padx=10, pady=10)
 
-        self.button_process = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 35), command=self.preprocess_file, fg_color="gray30")
-        self.button_process.grid(row=3, column=0, columnspan=3, pady=20)
+        self.button_process = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 40), command=self.preprocess_file, fg_color="gray30", width=200)
+        self.button_process.grid(row=2, column=0, columnspan=3, pady=20)
 
-        self.label_result = ctk.CTkLabel(self.frame, text="", font=("Helvetica", 35), text_color="black")
-        self.label_result.grid(row=4, column=0, columnspan=3, pady=10)
+        self.label_result = ctk.CTkLabel(self.frame, text="", font=("Helvetica", 40), text_color="black")
+        self.label_result.grid(row=3, column=0, columnspan=3, pady=10)
 
     def confirm_cutoff(self):
         self.entry_cutOff.get()
@@ -46,7 +46,7 @@ class ContactCalculatorHc:
 
         if topology_file and trajectory_file and cutoff_distance:
             self.process_file(topology_file, trajectory_file, cutoff_distance, output_directory)
-            self.label_result.configure(text="Processing completed successfully!", text_color="green")
+            self.label_result.configure(text="Processing completed successfully!", text_color="white")
         else:
             self.label_result.configure(text="Please fill all fields correctly.", text_color="red")
 
@@ -114,12 +114,12 @@ class ContactCalculatorHc:
         np.savetxt(persistence_matrix_file, persistence_matrix, fmt='%.1f')
 
         # Messaggio di conferma di salvataggio dei file
-        self.label_result.configure(text="Files saved successfully!", text_color="green")
+        self.label_result.configure(text="Files saved successfully!", text_color="white")
 
 # Avvio della GUI
 if __name__ == "__main__":
     ctk.set_appearance_mode("dark")  # Modalità scura
-    ctk.set_default_color_theme("green")  # Imposta un tema di default
+    ctk.set_default_color_theme("blue")  # Imposta un tema di default
 
     root = ctk.CTk()  # Crea la finestra principale con customtkinter
     app = ContactCalculatorHc(root, "topology.pdb", "trajectory.dcd", "output_directory")

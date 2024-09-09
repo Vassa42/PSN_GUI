@@ -10,12 +10,12 @@ class ContactType:
     def __init__(self, root):
         self.root = root
         self.root.title("Contact type")
-        self.root.configure(bg='#7cfc00')
+        self.root.configure(bg='LightSkyBlue1')
 
-        self.outer_frame = customtkinter.CTkFrame(self.root, fg_color='#7cfc00', corner_radius=10)
+        self.outer_frame = customtkinter.CTkFrame(self.root, fg_color='LightSkyBlue1', corner_radius=10)
         self.outer_frame.pack(expand=True, fill='both', padx=10, pady=10)
 
-        self.frame = customtkinter.CTkFrame(self.outer_frame, fg_color='#7cfc00', corner_radius=10)
+        self.frame = customtkinter.CTkFrame(self.outer_frame, fg_color='LightSkyBlue1', corner_radius=10)
         self.frame.pack(expand=True, padx=10, pady=10)
 
         self.label_output = customtkinter.CTkLabel(self.frame, text="Select the contact's type:", font=("Helvetica", 45), text_color="#000000")
@@ -45,7 +45,7 @@ class ContactType:
                                                      hover_color="#555555")  # Slightly lighter hover color
         self.button_select.grid(row=4, column=0, columnspan=3, pady=20)
 
-        self.label_result = customtkinter.CTkLabel(self.frame, text="", font=("Helvetica", 35), fg_color='#7cfc00', text_color="#000000")
+        self.label_result = customtkinter.CTkLabel(self.frame, text="", font=("Helvetica", 35), fg_color='LightSkyBlue1', text_color="#000000")
         self.label_result.grid(row=5, column=0, columnspan=3, pady=10)
 
         # Aggiungi campi per memorizzare file

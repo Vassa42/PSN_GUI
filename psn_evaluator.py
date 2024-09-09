@@ -11,11 +11,11 @@ class PSNEvaluator:
         ctk.set_default_color_theme("blue")
 
         # Crea un Frame esterno con la cornice
-        self.outer_frame = ctk.CTkFrame(root, fg_color='lightgreen', border_color="black", border_width=2)
+        self.outer_frame = ctk.CTkFrame(root, fg_color='dark sea green', border_color="black", border_width=2)
         self.outer_frame.pack(expand=True, fill='both', padx=10, pady=10)
 
         # Crea un Frame interno per contenere i widget
-        self.frame = ctk.CTkFrame(self.outer_frame, fg_color='lightgreen')
+        self.frame = ctk.CTkFrame(self.outer_frame, fg_color='dark sea green')
         self.frame.pack(expand=True, padx=10, pady=10)
 
         # Selezione del file macro_IIN
@@ -98,7 +98,7 @@ class PSNEvaluator:
             return
 
         # Messaggio di conferma, per ora non implementa la logica del processo
-        self.label_result.config(text=f"Processing with macro IIN file: {macro_IIN_file}\nFile: {structure_file}\nMetrics: {', '.join(selected_metrics)}", text_color='green')
+        self.label_result.config(text=f"Processing with macro IIN file: {macro_IIN_file}\nFile: {structure_file}\nMetrics: {', '.join(selected_metrics)}", text_color='white')
 
 if __name__ == "__main__":
     root = ctk.CTk()

@@ -15,13 +15,13 @@ class ContactCalculatorHb:
 
         # Imposta tema scuro di default
         ctk.set_appearance_mode("dark")
-        ctk.set_default_color_theme("green")  # Tema colore verde
+        ctk.set_default_color_theme("blue")  # Tema colore verde
 
         # Frame esterno con bordi e padding
-        self.outer_frame = ctk.CTkFrame(root, border_color="black", border_width=2, fg_color="#458b00")
+        self.outer_frame = ctk.CTkFrame(root, border_color="black", border_width=2, fg_color="DodgerBlue2")
         self.outer_frame.pack(expand=True, fill='both', padx=10, pady=10)
 
-        self.frame = ctk.CTkFrame(self.outer_frame, fg_color="#458b00")
+        self.frame = ctk.CTkFrame(self.outer_frame, fg_color="DodgerBlue2")
         self.frame.pack(expand=True, padx=10, pady=10)
 
         # Label e campo per l'inserimento della distanza di cut-off
@@ -29,31 +29,31 @@ class ContactCalculatorHb:
                                          text_color="black")
         self.label_cutOff.grid(row=1, column=0, padx=10, pady=10)
 
-        self.entry_cutOff = ctk.CTkEntry(self.frame, width=200, height=50, justify="center", font=("helvetica", 35))
+        self.entry_cutOff = ctk.CTkEntry(self.frame, width=200, justify="center", font=("helvetica", 40))
         self.entry_cutOff.insert(0, "3.5")
-        self.entry_cutOff.grid(row=2, column=0, padx=10, pady=10)
+        self.entry_cutOff.grid(row=1, column=1, padx=10, pady=10)
 
-        self.button_cutOff = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 35),
-                                           command=self.confirm_cutoff, fg_color="gray30", width=200, height=50)
-        self.button_cutOff.grid(row=2, column=1, padx=10, pady=10)
+        self.button_cutOff = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 40),
+                                           command=self.confirm_cutoff, fg_color="gray30", width=200)
+        self.button_cutOff.grid(row=1, column=2, padx=10, pady=10)
 
         # Label e campo per l'inserimento dell'angolo del legame
-        self.label_angle = ctk.CTkLabel(self.frame, text="Insert the bond's angle (D) default = 120.0 :",
+        self.label_angle = ctk.CTkLabel(self.frame, text="Insert the bond's angle (D):",
                                         font=("helvetica", 50), text_color="black")
-        self.label_angle.grid(row=3, column=0, padx=10, pady=10)
+        self.label_angle.grid(row=2, column=0, padx=10, pady=10)
 
-        self.entry_angle = ctk.CTkEntry(self.frame, width=200, height=50, justify="center", font=("helvetica", 35))
+        self.entry_angle = ctk.CTkEntry(self.frame, width=200, justify="center", font=("helvetica", 40))
         self.entry_angle.insert(0, "120.0")
-        self.entry_angle.grid(row=4, column=0, padx=10, pady=10)
+        self.entry_angle.grid(row=2, column=1, padx=10, pady=10)
 
-        self.button_angle = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 35),
-                                          command=self.confirm_angle, fg_color="gray30", width=200, height=50)
-        self.button_angle.grid(row=4, column=1, padx=10, pady=10)
+        self.button_angle = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 40),
+                                          command=self.confirm_angle, fg_color="gray30", width=200)
+        self.button_angle.grid(row=2, column=2, padx=10, pady=10)
 
         # Label e campo per la selezione della classe di legami idrogeno
         self.label_class = ctk.CTkLabel(self.frame, text="Select the class of hydrogen bonds to analyze:",
                                         font=("Helvetica", 50), text_color="black")
-        self.label_class.grid(row=5, column=0, padx=10, pady=10)
+        self.label_class.grid(row=3, column=0, padx=10, pady=10)
 
         self.classes = ["All", "Mc-Mc", "Mc-Sc", "Sc-Sc"]
         self.selected_class = ctk.StringVar()
@@ -64,21 +64,20 @@ class ContactCalculatorHb:
                                               variable=self.selected_class,
                                               state='readonly',
                                               width=200,
-                                              height=50,
-                                              font=("helvetica", 35),
+                                              font=("helvetica", 40),
                                               dropdown_font=(
-                                              "helvetica", 35))  # Imposta il font per i valori nel menu a tendina
-        self.combobox_class.grid(row=6, column=0, padx=10, pady=10)
+                                              "helvetica", 40))  # Imposta il font per i valori nel menu a tendina
+        self.combobox_class.grid(row=3, column=1, padx=10, pady=10)
         self.combobox_class.set(self.classes[0])
 
         # Bottone per avviare il processo di calcolo
-        self.button_process = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 35),
-                                            command=self.process_files, fg_color="gray30", width=200, height=50)
-        self.button_process.grid(row=7, column=0, columnspan=3, pady=20)
+        self.button_process = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 40),
+                                            command=self.process_files, fg_color="gray30", width=200)
+        self.button_process.grid(row=4, column=0, columnspan=3, pady=20)
 
         # Label per visualizzare il risultato o eventuali messaggi di errore
-        self.label_result = ctk.CTkLabel(self.frame, text="", font=("Helvetica", 35))
-        self.label_result.grid(row=8, column=0, columnspan=3, pady=10)
+        self.label_result = ctk.CTkLabel(self.frame, text="", font=("Helvetica", 40))
+        self.label_result.grid(row=5, column=0, columnspan=3, pady=10)
 
     def confirm_cutoff(self):
         self.entry_cutOff.get()
@@ -198,7 +197,7 @@ class ContactCalculatorHb:
         # Salva la matrice di persistenza in formato .dat
         np.savetxt(output_dat, persistence_matrix, fmt="%.1f")
 
-        self.label_result.configure(text="Files saved successfully!", fg="#7fff00")
+        self.label_result.configure(text="Files saved successfully!", fg="white")
 
 
 # Avvio della GUI
