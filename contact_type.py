@@ -18,7 +18,7 @@ class ContactType:
         self.frame = customtkinter.CTkFrame(self.outer_frame, fg_color='LightSkyBlue1', corner_radius=10)
         self.frame.pack(expand=True, padx=10, pady=10)
 
-        self.label_output = customtkinter.CTkLabel(self.frame, text="Select the contact's type:", font=("Helvetica", 45), text_color="#000000")
+        self.label_output = customtkinter.CTkLabel(self.frame, text="Select the contact's type:", font=("Helvetica", 50), text_color="#000000")
         self.label_output.grid(row=0, column=0, padx=10, pady=10)
 
         # Variabili per i checkbox
@@ -28,11 +28,11 @@ class ContactType:
 
         # Checkbox per i vari moduli
         self.check_SB = customtkinter.CTkCheckBox(self.frame, text="Salt Bridges", variable=self.var_salt_bridges,
-                                                  font=("Helvetica", 35), text_color="#000000", command=self.update_button_state)
+                                                  font=("Helvetica", 40), text_color="#000000", command=self.update_button_state)
         self.check_HC = customtkinter.CTkCheckBox(self.frame, text="Hydrophobic Clusters", variable=self.var_hydrophobic_clusters,
-                                                  font=("Helvetica", 35), text_color="#000000", command=self.update_button_state)
+                                                  font=("Helvetica", 40), text_color="#000000", command=self.update_button_state)
         self.check_HB = customtkinter.CTkCheckBox(self.frame, text="Hydrogen Bonds", variable=self.var_hydrogen_bonds,
-                                                  font=("Helvetica", 35), text_color="#000000", command=self.update_button_state)
+                                                  font=("Helvetica", 40), text_color="#000000", command=self.update_button_state)
 
         self.check_SB.grid(row=1, column=0, sticky='w', padx=10)
         self.check_HC.grid(row=2, column=0, sticky='w', padx=10)
@@ -40,12 +40,12 @@ class ContactType:
 
         # Bottone per selezionare i file e avviare i calcolatori
         self.button_select = customtkinter.CTkButton(self.frame, text="Select", command=self.open_file_selectors,
-                                                     state="disabled", font=("Helvetica", 35),
+                                                     state="disabled", font=("Helvetica", 40),
                                                      fg_color="#333333",  # Dark color for button
-                                                     hover_color="#555555")  # Slightly lighter hover color
+                                                     hover_color="#555555", width=200)  # Slightly lighter hover color
         self.button_select.grid(row=4, column=0, columnspan=3, pady=20)
 
-        self.label_result = customtkinter.CTkLabel(self.frame, text="", font=("Helvetica", 35), fg_color='LightSkyBlue1', text_color="#000000")
+        self.label_result = customtkinter.CTkLabel(self.frame, text="", font=("Helvetica", 40), fg_color='LightSkyBlue1', text_color="#000000")
         self.label_result.grid(row=5, column=0, columnspan=3, pady=10)
 
         # Aggiungi campi per memorizzare file
@@ -109,7 +109,7 @@ class ContactType:
 
 if __name__ == "__main__":
     customtkinter.set_appearance_mode("dark")  # Modalità scura
-    customtkinter.set_default_color_theme("green")  # Tema verde
+    customtkinter.set_default_color_theme("blue")  # Tema verde
 
     root = customtkinter.CTk()
     app = ContactType(root)

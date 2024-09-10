@@ -27,7 +27,7 @@ class ContactCalculatorHb:
         # Label e campo per l'inserimento della distanza di cut-off
         self.label_cutOff = ctk.CTkLabel(self.frame, text="Insert the cut-off distance (A):", font=("helvetica", 50),
                                          text_color="black")
-        self.label_cutOff.grid(row=1, column=0, padx=10, pady=10)
+        self.label_cutOff.grid(row=1, column=0, padx=10, pady=10, sticky='w')
 
         self.entry_cutOff = ctk.CTkEntry(self.frame, width=200, justify="center", font=("helvetica", 40))
         self.entry_cutOff.insert(0, "3.5")
@@ -40,7 +40,7 @@ class ContactCalculatorHb:
         # Label e campo per l'inserimento dell'angolo del legame
         self.label_angle = ctk.CTkLabel(self.frame, text="Insert the bond's angle (D):",
                                         font=("helvetica", 50), text_color="black")
-        self.label_angle.grid(row=2, column=0, padx=10, pady=10)
+        self.label_angle.grid(row=2, column=0, padx=10, pady=10, sticky='w')
 
         self.entry_angle = ctk.CTkEntry(self.frame, width=200, justify="center", font=("helvetica", 40))
         self.entry_angle.insert(0, "120.0")
@@ -51,9 +51,9 @@ class ContactCalculatorHb:
         self.button_angle.grid(row=2, column=2, padx=10, pady=10)
 
         # Label e campo per la selezione della classe di legami idrogeno
-        self.label_class = ctk.CTkLabel(self.frame, text="Select the class of hydrogen bonds to analyze:",
+        self.label_class = ctk.CTkLabel(self.frame, text="Select the class to analyze:",
                                         font=("Helvetica", 50), text_color="black")
-        self.label_class.grid(row=3, column=0, padx=10, pady=10)
+        self.label_class.grid(row=3, column=0, padx=10, pady=10, sticky='w')
 
         self.classes = ["All", "Mc-Mc", "Mc-Sc", "Sc-Sc"]
         self.selected_class = ctk.StringVar()
