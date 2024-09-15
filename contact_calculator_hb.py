@@ -93,7 +93,7 @@ class ContactCalculatorHb:
         output_directory = self.output_directory
 
         if not output_directory:
-            self.label_result.configure(text="Please select an output directory.", fg="red")
+            self.label_result.configure(text="Please select an output directory.", text_color="red")
             return
 
         # Estrai il nome base del file di topologia senza estensione
@@ -158,7 +158,7 @@ class ContactCalculatorHb:
                             f"Distance: {distance:.3f} Å")
 
         if not hb_results:
-            self.label_result.configure(text="No hydrogen bonds were found.", fg="red")
+            self.label_result.configure(text="No hydrogen bonds were found.", text_color="red")
             return
 
         # Converti la matrice di persistenza in percentuali
@@ -197,7 +197,7 @@ class ContactCalculatorHb:
         # Salva la matrice di persistenza in formato .dat
         np.savetxt(output_dat, persistence_matrix, fmt="%.1f")
 
-        self.label_result.configure(text="Files saved successfully!", fg="white")
+        self.label_result.configure(text="Files saved successfully!", text_color="white")
 
 
 # Avvio della GUI

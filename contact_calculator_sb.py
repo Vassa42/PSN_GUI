@@ -43,7 +43,7 @@ class ContactCalculatorSb:
     def confirm_cutoff(self):
         self.entry_cutOff.get()
 
-    # Funzione principale per avviare il calcolo, verificando che tutti i dati siano corretti
+    # Funzione principale per avviare il calcolo
     def preprocess_file(self):
         topology_file = self.topology_file
         trajectory_file = self.trajectory_file
@@ -51,78 +51,99 @@ class ContactCalculatorSb:
         output_directory = self.output_directory
 
         if topology_file and trajectory_file and cutoff_distance:
-            self.process_file(topology_file, trajectory_file, cutoff_distance, output_directory)  # Avvia l'elaborazione dei file
-            self.label_result.configure(text="Processing completed successfully!", text_color="white")  # Mostra un messaggio di successo
+            self.process_file(topology_file, trajectory_file, cutoff_distance, output_directory)
+            self.label_result.configure(text="Processing completed successfully!", text_color="white")
         else:
-            self.label_result.configure(text="Please fill all fields correctly.", text_color="red")  # Messaggio di errore se i campi non sono completi
+            self.label_result.configure(text="Please fill all fields correctly.", text_color="red")
 
-    # Funzione che esegue effettivamente il calcolo dei ponti salini
     def process_file(self, topology_file, trajectory_file, cutoff_distance, output_directory):
-        u = mda.Universe(topology_file, trajectory_file)  # Carica la topologia e la traiettoria usando MDAnalysis
+        u = mda.Universe(topology_file, trajectory_file)
 
-        # Ottieni il nome del file di topologia senza l'estensione
         file_prefix = os.path.splitext(os.path.basename(topology_file))[0]
 
-        # Funzione per trovare i ponti salini utilizzando KD-tree e le distanze tra residui acidi e basici
         def find_salt_bridges(universe, cutoff=3.2):
-            acidic_residues = universe.select_atoms(
-                "resname ASP GLU and name OE1 OE2 OD1 OD2")  # Seleziona residui acidi
-            basic_residues = universe.select_atoms("resname ARG LYS and name NH1 NH2 NZ")  # Seleziona residui basici
+            acidic_residues = universe.select_atoms("resname ASP GLU and name OE1 OE2 OD1 OD2")
+            basic_residues = universe.select_atoms("resname ARG LYS and name NH1 NH2 NZ")
             n_residues = len(universe.residues)
 
-            contacts = []  # Lista per memorizzare i contatti tra residui
-            adjacency_matrix = np.zeros((n_residues, n_residues))  # Matrice di persistenza inizializzata a 0
+            contacts = []
+            adjacency_matrix = np.zeros((n_residues, n_residues))
             frame_count = 0
 
-            # Loop per ogni frame della traiettoria
+            # Nuovo set per evitare doppi conteggi di contatti nello stesso frame
+            contacts_set = set()
+
             for ts in universe.trajectory:
-                frame_count += 1  # Conta i frame
-                # Crea KD-tree per una ricerca spaziale efficiente
+                frame_count += 1
                 kd_tree_acidic = cKDTree(acidic_residues.positions)
                 kd_tree_basic = cKDTree(basic_residues.positions)
-
-                # Trova coppie di residui entro il raggio di cutoff
                 pairs = kd_tree_acidic.query_ball_tree(kd_tree_basic, r=cutoff)
 
-                # Aggiorna i contatti e la matrice di adiacenza
                 for i, connected in enumerate(pairs):
                     for j in connected:
                         acid_res = acidic_residues[i].residue
                         basic_res = basic_residues[j].residue
-                        contacts.append((acid_res, basic_res))
-                        adjacency_matrix[acid_res.resid, basic_res.resid] += 1  # Aggiungi una persistenza
-                        adjacency_matrix[basic_res.resid, acid_res.resid] += 1
 
-            # Converti la matrice di adiacenza in persistenza (percentuale di frame in cui il contatto esiste)
+                        # Creiamo una chiave unica per evitare doppi contatti nello stesso frame
+                        contact_key = tuple(sorted((acid_res.resid, basic_res.resid)))
+                        if contact_key not in contacts_set:
+                            contacts.append((acid_res, basic_res))
+                            adjacency_matrix[acid_res.resid, basic_res.resid] += 1
+                            adjacency_matrix[basic_res.resid, acid_res.resid] += 1
+                            contacts_set.add(contact_key)
+
+                contacts_set.clear()  # Reset dei contatti per il prossimo frame
+
+            # Persistenza come percentuale di durata del legame sul totale dei frame
             persistence_matrix = (adjacency_matrix / frame_count) * 100
+            return contacts, persistence_matrix
 
-            return contacts, persistence_matrix  # Ritorna i contatti e la matrice di persistenza
-
-        # Chiama la funzione per trovare i ponti salini
         contacts, persistence_matrix = find_salt_bridges(u, cutoff=cutoff_distance)
 
-        # Salva i risultati: i contatti vengono salvati in un file di testo e la matrice di persistenza in un file .dat
+        # Salva i risultati dei contatti nel formato richiesto
         contacts_file = os.path.join(output_directory, f"{file_prefix}_contacts_SB.txt")
-        persistence_matrix_file = os.path.join(output_directory, f"{file_prefix}_matrix_SB.dat")
 
         with open(contacts_file, 'w') as f:
-            f.write("Residuo1\tResiduo2\tPersistenza\n")
+            f.write(
+                "#CHAIN,RES1_ID,RES1_NAME,RES1_CHARGEDGROUP,RES2_ID,RES2_NAME,RES2_CHARGEGROUP,OCCURRENCE_PERC\n")
+
             for i in range(len(persistence_matrix)):
                 for j in range(i + 1, len(persistence_matrix)):
-                    if persistence_matrix[i, j] > 0:  # Solo contatti con persistenza
+                    if persistence_matrix[i, j] > 0:
                         acid_res, basic_res = contacts[i]
-                        f.write(f"{acid_res.resid}\t{basic_res.resid}\t{persistence_matrix[i, j]:.1f}\n")
 
+                        chain1 = acid_res.segid
+                        chain2 = basic_res.segid
+                        res1_id = acid_res.resid
+                        res1_name = acid_res.resname
+                        res2_id = basic_res.resid
+                        res2_name = basic_res.resname
+
+                        # Gruppi caricati (puoi personalizzare ulteriormente)
+                        if res1_name == "ASP":
+                            res1_group = "sc.asp.COOn"
+                        elif res1_name == "GLU":
+                            res1_group = "sc.glu.COOn"
+                        if res2_name == "LYS":
+                            res2_group = "sc.lys.NZp"
+                        elif res2_name == "ARG":
+                            res2_group = "sc.arg.NH1p"
+
+                        # Scrivi i dati nel formato richiesto
+                        f.write(
+                            f"SYSTEM,{res1_id},{res1_name},{res1_group},SYSTEM,{res2_id},{res2_name},{res2_group},{persistence_matrix[i, j]:.10f}\n")
+
+        # Salva la matrice di persistenza in un file .dat
+        persistence_matrix_file = os.path.join(output_directory, f"{file_prefix}_matrix_SB.dat")
         np.savetxt(persistence_matrix_file, persistence_matrix, fmt='%.1f')
 
-        self.label_result.configure(text="Files saved successfully!", text_color="white")  # Messaggio di conferma di salvataggio dei file
-
+        self.label_result.configure(text="Files saved successfully!", text_color="white")
 
 # Avvio della GUI
 if __name__ == "__main__":
-    ctk.set_appearance_mode("dark")  # Imposta la modalità chiara (opzionale)
-    ctk.set_default_color_theme("blue")  # Imposta il tema di default (opzionale)
+    ctk.set_appearance_mode("dark")
+    ctk.set_default_color_theme("blue")
 
-    root = ctk.CTk()  # Usa CTk per creare la finestra principale
+    root = ctk.CTk()
     app = ContactCalculatorSb(root, "topology.pdb", "trajectory.dcd", "output_directory")
     root.mainloop()

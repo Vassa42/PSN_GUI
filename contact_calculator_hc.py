@@ -116,6 +116,7 @@ class ContactCalculatorHc:
         # Messaggio di conferma di salvataggio dei file
         self.label_result.configure(text="Files saved successfully!", text_color="white")
 
+
 # Avvio della GUI
 if __name__ == "__main__":
     ctk.set_appearance_mode("dark")  # Modalità scura
