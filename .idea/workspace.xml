@@ -5,21 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69a04427-38a0-4691-ad25-b0f91d90f433" name="Changes" comment="changes">
-      <change afterPath="$PROJECT_DIR$/centrality_analysis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charged_groups.ini" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/connected_components.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/degree_analysis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hydrogen_bonds.ini" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/path_analysis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preliminary_macro_iin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preliminary_plot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/topology_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_calculator_hb.py" beforeDir="false" afterPath="$PROJECT_DIR$/contact_calculator_hb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_calculator_hc.py" beforeDir="false" afterPath="$PROJECT_DIR$/contact_calculator_hc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_calculator_sb.py" beforeDir="false" afterPath="$PROJECT_DIR$/contact_calculator_sb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/psn_evaluator.py" beforeDir="false" afterPath="$PROJECT_DIR$/psn_evaluator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/psn_preliminary.py" beforeDir="false" afterPath="$PROJECT_DIR$/psn_preliminary.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/path_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/path_analysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726390957881</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="changes">
+      <option name="closed" value="true" />
+      <created>1726748881247</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1726748881248</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
