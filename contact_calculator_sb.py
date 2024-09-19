@@ -21,29 +21,45 @@ class ContactCalculatorSb:
         self.frame.pack(expand=True, padx=10, pady=10)
 
         # Sezione per inserire la distanza di cutoff per il calcolo dei contatti
-        self.label_cutOff = ctk.CTkLabel(self.frame, text="Insert the cut-off distance (A):", font=("Helvetica", 50), fg_color='SteelBlue2', text_color="black")
-        self.label_cutOff.grid(row=1, column=0, padx=10, pady=10)
+        self.label_cutOff = ctk.CTkLabel(self.frame, text="Insert the cut-off distance (A):", font=("Helvetica", 40), fg_color='SteelBlue2', text_color="black")
+        self.label_cutOff.grid(row=1, column=0, padx=10, pady=10, sticky='w')
 
-        self.entry_cutOff = ctk.CTkEntry(self.frame, width=200, justify="center", font=("Helvetica", 40))
+        self.entry_cutOff = ctk.CTkEntry(self.frame, width=200, justify="center", font=("Helvetica", 30))
         self.entry_cutOff.insert(0, "4.5")
         self.entry_cutOff.grid(row=1, column=1, padx=10, pady=10)
 
-        self.button_cutOff = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 40), command=self.confirm_cutoff, fg_color="gray30", width=200)
+        self.button_cutOff = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 30), command=self.confirm_cutoff, fg_color="gray30", width=200)
         self.button_cutOff.grid(row=1, column=2, padx=10, pady=10)
 
+        self.label_charged = ctk.CTkLabel(self.frame, text="Select the charged groups' file:", font=("Helvetica", 40), text_color="black")
+        self.label_charged.grid(row=2, column=0, padx=10, pady=10, sticky='w')
+
+        self.entry_charged = ctk.CTkEntry(self.frame, width=500, justify="center", font=("Helvetica", 25))
+        self.entry_charged.insert(0, "/home/vassa42/Documenti/Tirocinio-Tesi/PSN_GUI/charged_groups.ini")
+        self.entry_charged.grid(row=2, column=1, padx=10, pady=10)
+
+        self.button_charged = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 30), command=self.browse_charged_groups_file, width=200, height=40, fg_color="gray30")
+        self.button_charged.grid(row=2, column=2, padx=10, pady=10)
+
         # Bottone per avviare il processo di calcolo
-        self.button_process = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 40), command=self.preprocess_file, fg_color="gray30", width=200)
-        self.button_process.grid(row=2, column=0, columnspan=3, pady=20)
+        self.button_process = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 30), fg_color="gray30", width=200)
+        self.button_process.grid(row=3, column=0, columnspan=3, pady=20)
 
         # Label per visualizzare il risultato dell'operazione (es. completamento o errore)
         self.label_result = ctk.CTkLabel(self.frame, text="", font=("Helvetica", 40), fg_color='SteelBlue2', text_color="black")
-        self.label_result.grid(row=3, column=0, columnspan=3, pady=10)
+        self.label_result.grid(row=4, column=0, columnspan=3, pady=10)
 
     # Funzione per confermare la distanza di cut-off inserita
     def confirm_cutoff(self):
         self.entry_cutOff.get()
 
-    # Funzione principale per avviare il calcolo
+    def browse_charged_groups_file(self):
+        filename = ctk.filedialog.askopenfilename(parent=self.root, title="Select the charged groups' file", filetypes=[("INI files", "*.ini"), ("All files", "*.*")])
+        if filename:
+            self.entry_charged.delete(0, ctk.END)
+            self.entry_charged.insert(0, filename)
+
+""" Funzione principale per avviare il calcolo
     def preprocess_file(self):
         topology_file = self.topology_file
         trajectory_file = self.trajectory_file
@@ -105,7 +121,7 @@ class ContactCalculatorSb:
 
         with open(contacts_file, 'w') as f:
             f.write(
-                "#CHAIN,RES1_ID,RES1_NAME,RES1_CHARGEDGROUP,RES2_ID,RES2_NAME,RES2_CHARGEGROUP,OCCURRENCE_PERC\n")
+                "#CHAIN\tRES1_ID\tRES1_NAME\tRES1_CHARGEDGROUP\tRES2_ID\tRES2_NAME\tRES2_CHARGEGROUP\tOCCURRENCE_PERC\n")
 
             for i in range(len(persistence_matrix)):
                 for j in range(i + 1, len(persistence_matrix)):
@@ -131,14 +147,14 @@ class ContactCalculatorSb:
 
                         # Scrivi i dati nel formato richiesto
                         f.write(
-                            f"SYSTEM,{res1_id},{res1_name},{res1_group},SYSTEM,{res2_id},{res2_name},{res2_group},{persistence_matrix[i, j]:.10f}\n")
+                            f"SYSTEM\t{res1_id}\t{res1_name}\t{res1_group}\tSYSTEM\t{res2_id}\t{res2_name}\t{res2_group}\t{persistence_matrix[i, j]:.2f}\n")
 
         # Salva la matrice di persistenza in un file .dat
         persistence_matrix_file = os.path.join(output_directory, f"{file_prefix}_matrix_SB.dat")
         np.savetxt(persistence_matrix_file, persistence_matrix, fmt='%.1f')
 
         self.label_result.configure(text="Files saved successfully!", text_color="white")
-
+"""
 # Avvio della GUI
 if __name__ == "__main__":
     ctk.set_appearance_mode("dark")

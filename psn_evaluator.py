@@ -1,5 +1,10 @@
+import customtkinter
 import customtkinter as ctk
 from tkinter import filedialog
+
+from path_analysis import PathAnalysis
+from topology_analysis import TopologyAnalysis
+
 
 class PSNEvaluator:
     def __init__(self, root):
@@ -42,20 +47,17 @@ class PSNEvaluator:
         self.label_metrics = ctk.CTkLabel(self.frame, text="Select the metrics to evaluate:", font=("Helvetica", 50), text_color="black")
         self.label_metrics.grid(row=2, column=0, padx=10, pady=10, sticky='w')
 
-        self.var_graph_analysis = ctk.BooleanVar()
         self.var_path_analysis = ctk.BooleanVar()
-        self.var_centrality_analysis = ctk.BooleanVar()
+        self.var_topology_analysis = ctk.BooleanVar()
 
-        self.check_graph_analysis = ctk.CTkCheckBox(self.frame, text="Graph Analysis", variable=self.var_graph_analysis, font=("Helvetica", 40), text_color="black")
         self.check_path_analysis = ctk.CTkCheckBox(self.frame, text="Path Analysis", variable=self.var_path_analysis, font=("Helvetica", 40), text_color="black")
-        self.check_centrality_analysis = ctk.CTkCheckBox(self.frame, text="Centrality Analysis", variable=self.var_centrality_analysis, font=("Helvetica", 40), text_color="black")
+        self.check_topology_analysis = ctk.CTkCheckBox(self.frame, text="Topology Analysis", variable=self.var_topology_analysis, font=("Helvetica", 40), text_color="black")
 
-        self.check_graph_analysis.grid(row=3, column=0, sticky='w', padx=10)
-        self.check_path_analysis.grid(row=4, column=0, sticky='w', padx=10)
-        self.check_centrality_analysis.grid(row=5, column=0, sticky='w', padx=10)
+        self.check_path_analysis.grid(row=3, column=0, sticky='w', padx=10)
+        self.check_topology_analysis.grid(row=4, column=0, sticky='w', padx=10)
 
-        # Bottone per avviare il processo
-        self.button_process = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 40), command=self.process_files, width=200, height=40, fg_color="gray30")
+        # Bottone per la selezione
+        self.button_process = ctk.CTkButton(self.frame, text="Select", command=self.open_metrics, font=("Helvetica", 40), width=200, height=40, fg_color="gray30")
         self.button_process.grid(row=7, column=0, columnspan=2, pady=20)
 
         # Etichetta per il risultato
@@ -74,6 +76,19 @@ class PSNEvaluator:
             self.entry_structure_file.delete(0, ctk.END)
             self.entry_structure_file.insert(0, file_path)
 
+    def open_metrics(self):
+        if self.var_path_analysis.get() and self.var_topology_analysis.get():
+            self.new_window1 = customtkinter.CTkToplevel(self.root)
+            PathAnalysis(self.new_window1)
+            self.new_window2 = customtkinter.CTkToplevel(self.root)
+            TopologyAnalysis(self.new_window2)
+        elif self.var_path_analysis.get():
+            self.new_window3 = customtkinter.CTkToplevel(self.root)
+            PathAnalysis(self.new_window3)
+        elif self.var_topology_analysis.get():
+            self.new_window4 = customtkinter.CTkToplevel(self.root)
+            TopologyAnalysis(self.new_window4)
+"""
     def process_files(self):
         macro_IIN_file = self.entry_macro_IIN_file.get()
         structure_file = self.entry_structure_file.get()
@@ -99,6 +114,7 @@ class PSNEvaluator:
 
         # Messaggio di conferma, per ora non implementa la logica del processo
         self.label_result.config(text=f"Processing with macro IIN file: {macro_IIN_file}\nFile: {structure_file}\nMetrics: {', '.join(selected_metrics)}", text_color='white')
+"""
 
 if __name__ == "__main__":
     root = ctk.CTk()
