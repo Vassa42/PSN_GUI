@@ -28,34 +28,34 @@ class PSNPreliminary:
         self.frame.pack(expand=True, padx=10, pady=10)
 
         # Inserimento file matrici di persistenza
-        self.label_persistence_SB = ctk.CTkLabel(self.frame, text="Persistence matrix SB:", font=("Helvetica", 50), text_color="black")
+        self.label_persistence_SB = ctk.CTkLabel(self.frame, text="Persistence matrix SB:", font=("Helvetica", 40), text_color="black")
         self.label_persistence_SB.grid(row=0, column=0, padx=10, pady=10, sticky='w')
 
-        self.entry_persistence_SB = ctk.CTkEntry(self.frame, width=500, font=("Helvetica", 30))
+        self.entry_persistence_SB = ctk.CTkEntry(self.frame, width=500, font=("Helvetica", 25))
         self.entry_persistence_SB.grid(row=0, column=1, padx=10, pady=10)
 
-        self.button_persistence_SB = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 40), command=self.browse_persistence_file_SB, width=200, height=40, fg_color="gray30")
+        self.button_persistence_SB = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 30), command=self.browse_persistence_file_SB, width=200, height=40, fg_color="gray30")
         self.button_persistence_SB.grid(row=0, column=2, padx=10, pady=10)
 
-        self.label_persistence_HC = ctk.CTkLabel(self.frame, text="Persistence matrix HC:", font=("Helvetica", 50), text_color="black")
+        self.label_persistence_HC = ctk.CTkLabel(self.frame, text="Persistence matrix HC:", font=("Helvetica", 40), text_color="black")
         self.label_persistence_HC.grid(row=1, column=0, padx=10, pady=10, sticky='w')
 
-        self.entry_persistence_HC = ctk.CTkEntry(self.frame, width=500, font=("Helvetica", 30))
+        self.entry_persistence_HC = ctk.CTkEntry(self.frame, width=500, font=("Helvetica", 25))
         self.entry_persistence_HC.grid(row=1, column=1, padx=10, pady=10)
 
-        self.button_persistence_HC = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 40), command=self.browse_persistence_file_HC, width=200, height=40, fg_color="gray30")
+        self.button_persistence_HC = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 30), command=self.browse_persistence_file_HC, width=200, height=40, fg_color="gray30")
         self.button_persistence_HC.grid(row=1, column=2, padx=10, pady=10)
 
-        self.label_persistence_HB = ctk.CTkLabel(self.frame, text="Persistence matrix HB:", font=("Helvetica", 50), text_color="black")
+        self.label_persistence_HB = ctk.CTkLabel(self.frame, text="Persistence matrix HB:", font=("Helvetica", 40), text_color="black")
         self.label_persistence_HB.grid(row=2, column=0, padx=10, pady=10, sticky='w')
 
-        self.entry_persistence_HB = ctk.CTkEntry(self.frame, width=500, font=("Helvetica", 30))
+        self.entry_persistence_HB = ctk.CTkEntry(self.frame, width=500, font=("Helvetica", 25))
         self.entry_persistence_HB.grid(row=2, column=1, padx=10, pady=10)
 
-        self.button_persistence_HB = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 40), command=self.browse_persistence_file_HB, width=200, height=40, fg_color="gray30")
+        self.button_persistence_HB = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 30), command=self.browse_persistence_file_HB, width=200, height=40, fg_color="gray30")
         self.button_persistence_HB.grid(row=2, column=2, padx=10, pady=10)
 
-        self.label_choose_output = ctk.CTkLabel(self.frame, text="Output to generate:", font=("Helvetica", 50), text_color="black")
+        self.label_choose_output = ctk.CTkLabel(self.frame, text="Output to generate:", font=("Helvetica", 40), text_color="black")
         self.label_choose_output.grid(row=3, column=0, padx=10, pady=10, sticky='w')
 
         # Checkbox per generare Macro IIN e Plot
@@ -70,7 +70,7 @@ class PSNPreliminary:
         self.checkbox_macro_iin.grid(row=5, column=0, padx=10, pady=10, sticky='w')
 
         # Pulsante per la scelta
-        self.button_process = ctk.CTkButton(self.frame, text="Select", font=("Helvetica", 40), command=self.open_preliminaries, width=200, height=40, fg_color="gray30")
+        self.button_process = ctk.CTkButton(self.frame, text="Select", font=("Helvetica", 30), command=self.open_preliminaries, width=200, height=40, fg_color="gray30")
         self.button_process.grid(row=6, column=0, columnspan=3, pady=20)
 
         # Label per il risultato

@@ -24,27 +24,27 @@ class PSNEvaluator:
         self.frame.pack(expand=True, padx=10, pady=10)
 
         # Selezione del file macro_IIN
-        self.label_macro_IIN_file = ctk.CTkLabel(self.frame, text="Select the macro IIN file:", font=("Helvetica", 50), text_color="black")
+        self.label_macro_IIN_file = ctk.CTkLabel(self.frame, text="Select the macro IIN file:", font=("Helvetica", 40), text_color="black")
         self.label_macro_IIN_file.grid(row=0, column=0, padx=10, pady=10, sticky='w')
 
         self.entry_macro_IIN_file = ctk.CTkEntry(self.frame,font=("Helvetica", 30), width=500)
         self.entry_macro_IIN_file.grid(row=0, column=1, padx=10, pady=10)
 
-        self.button_browse_macro_IIN = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 40), command=self.browse_macro_IIN_file, width=200, fg_color="gray30")
+        self.button_browse_macro_IIN = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 30), command=self.browse_macro_IIN_file, width=200, fg_color="gray30")
         self.button_browse_macro_IIN.grid(row=0, column=2, padx=10, pady=10)
 
         # Selezione del file di struttura
-        self.label_structure_file = ctk.CTkLabel(self.frame, text="Select the structure file:", font=("Helvetica", 50), text_color="black")
+        self.label_structure_file = ctk.CTkLabel(self.frame, text="Select the structure file:", font=("Helvetica", 40), text_color="black")
         self.label_structure_file.grid(row=1, column=0, padx=10, pady=10, sticky='w')
 
         self.entry_structure_file = ctk.CTkEntry(self.frame, font=("Helvetica", 30), width=500)
         self.entry_structure_file.grid(row=1, column=1, padx=10, pady=10)
 
-        self.button_browse_structure = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 40), command=self.browse_structure_file, width=200, fg_color="gray30")
+        self.button_browse_structure = ctk.CTkButton(self.frame, text="Browse", font=("Helvetica", 30), command=self.browse_structure_file, width=200, fg_color="gray30")
         self.button_browse_structure.grid(row=1, column=2, padx=10, pady=10)
 
         # Selezione delle metriche da valutare
-        self.label_metrics = ctk.CTkLabel(self.frame, text="Select the metrics to evaluate:", font=("Helvetica", 50), text_color="black")
+        self.label_metrics = ctk.CTkLabel(self.frame, text="Select the metrics to evaluate:", font=("Helvetica", 40), text_color="black")
         self.label_metrics.grid(row=2, column=0, padx=10, pady=10, sticky='w')
 
         self.var_path_analysis = ctk.BooleanVar()
@@ -57,7 +57,7 @@ class PSNEvaluator:
         self.check_topology_analysis.grid(row=4, column=0, sticky='w', padx=10)
 
         # Bottone per la selezione
-        self.button_process = ctk.CTkButton(self.frame, text="Select", command=self.open_metrics, font=("Helvetica", 40), width=200, height=40, fg_color="gray30")
+        self.button_process = ctk.CTkButton(self.frame, text="Select", command=self.open_metrics, font=("Helvetica", 30), width=200, height=40, fg_color="gray30")
         self.button_process.grid(row=7, column=0, columnspan=2, pady=20)
 
         # Etichetta per il risultato

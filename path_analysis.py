@@ -21,10 +21,10 @@ class PathAnalysis:
                                             text_color="black")
         self.label_start_list.grid(row=0, column=0, padx=10, pady=10)
 
-        self.entry_start_list = ctk.CTkEntry(self.frame, width=200, height=40, font=("Helvetica", 40), justify="center")
+        self.entry_start_list = ctk.CTkEntry(self.frame, width=200, height=40, font=("Helvetica", 30), justify="center")
         self.entry_start_list.grid(row=0, column=1, padx=10, pady=10)
 
-        self.button_cutOff = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 40),
+        self.button_cutOff = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 30),
                                            command=self.confirm_start, fg_color="gray30", width=200)
         self.button_cutOff.grid(row=0, column=2, padx=10, pady=10)
 
@@ -33,14 +33,14 @@ class PathAnalysis:
                                              text_color="black")
         self.label_end_list.grid(row=1, column=0, padx=10, pady=10)
 
-        self.entry_end_list = ctk.CTkEntry(self.frame, width=200, height=40, font=("Helvetica", 40), justify="center")
+        self.entry_end_list = ctk.CTkEntry(self.frame, width=200, height=40, font=("Helvetica", 30), justify="center")
         self.entry_end_list.grid(row=1, column=1, padx=10, pady=10)
 
-        self.button_cutOff = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 40),
+        self.button_cutOff = ctk.CTkButton(self.frame, text="Confirm", font=("Helvetica", 30),
                                            command=self.confirm_end, fg_color="gray30", width=200)
         self.button_cutOff.grid(row=1, column=2, padx=10, pady=10)
 
-        self.process_button = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 40), width=200, height=40,
+        self.process_button = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 30), width=200, height=40,
                                             fg_color="gray30")
         self.process_button.grid(row=2, column=1, padx=10, pady=20)
 

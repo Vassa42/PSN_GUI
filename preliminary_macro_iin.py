@@ -27,11 +27,11 @@ class PreliminaryMacroIIN:
                                             text_color="black")
         self.label_threshold.grid(row=0, column=0, padx=10, pady=10)
 
-        self.entry_threshold = ctk.CTkEntry(self.frame, width=200, height=40, font=("Helvetica", 40), justify="center")
+        self.entry_threshold = ctk.CTkEntry(self.frame, width=200, height=40, font=("Helvetica", 30), justify="center")
         self.entry_threshold.grid(row=0, column=1, padx=10, pady=10)
         self.entry_threshold.insert(0, "20")
 
-        self.process_button = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 40), width=200, height=40,
+        self.process_button = ctk.CTkButton(self.frame, text="Process", font=("Helvetica", 30), width=200, height=40,
                                             fg_color="gray30")
         self.process_button.grid(row=1, column=0, padx=10, pady=20)
 

@@ -24,7 +24,7 @@ class TopologyAnalysis:
         self.frame.pack(expand=True, padx=10, pady=10)
 
         self.label_metrics = customtkinter.CTkLabel(self.frame, text="Select the metrics:",
-                                                   font=("Helvetica", 50), text_color="#000000")
+                                                   font=("Helvetica", 40), text_color="#000000")
         self.label_metrics.grid(row=0, column=0, padx=10, pady=10)
 
         # Variabili per i checkbox
@@ -46,7 +46,7 @@ class TopologyAnalysis:
         self.check_centrality.grid(row=3, column=0, sticky='w', padx=10)
 
         # Bottone la selezione
-        self.button_select = customtkinter.CTkButton(self.frame, text="Select", command=self.open_metrics_analysis, font=("Helvetica", 40),
+        self.button_select = customtkinter.CTkButton(self.frame, text="Select", command=self.open_metrics_analysis, font=("Helvetica", 30),
                                                      fg_color="#333333",  # Dark color for button
                                                      hover_color="#555555", width=200)  # Slightly lighter hover color
         self.button_select.grid(row=4, column=0, columnspan=3, pady=20)
