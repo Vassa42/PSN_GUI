@@ -12,21 +12,24 @@ class ContactType:
         self.root.title("Contact type")
         self.root.configure(bg='LightSkyBlue1')
 
+        # Crea il frame esterno con bordi arrotondati
         self.outer_frame = customtkinter.CTkFrame(self.root, fg_color='LightSkyBlue1', corner_radius=10)
         self.outer_frame.pack(expand=True, fill='both', padx=10, pady=10)
 
+        # Crea il frame principale dentro quello esterno
         self.frame = customtkinter.CTkFrame(self.outer_frame, fg_color='LightSkyBlue1', corner_radius=10)
         self.frame.pack(expand=True, padx=10, pady=10)
 
+        # Label di istruzioni all'utente
         self.label_output = customtkinter.CTkLabel(self.frame, text="Select the contact's type:", font=("Helvetica", 50), text_color="#000000")
         self.label_output.grid(row=0, column=0, padx=10, pady=10)
 
         # Variabili per i checkbox
-        self.var_salt_bridges = customtkinter.IntVar()
-        self.var_hydrophobic_clusters = customtkinter.IntVar()
-        self.var_hydrogen_bonds = customtkinter.IntVar()
+        self.var_salt_bridges = customtkinter.IntVar()  # Per selezionare Salt Bridges
+        self.var_hydrophobic_clusters = customtkinter.IntVar()  # Per selezionare Hydrophobic Clusters
+        self.var_hydrogen_bonds = customtkinter.IntVar()  # Per selezionare Hydrogen Bonds
 
-        # Checkbox per i vari moduli
+        # Checkbox per la selezione dei tipi di contatti
         self.check_SB = customtkinter.CTkCheckBox(self.frame, text="Salt Bridges", variable=self.var_salt_bridges,
                                                   font=("Helvetica", 40), text_color="#000000", command=self.update_button_state)
         self.check_HC = customtkinter.CTkCheckBox(self.frame, text="Hydrophobic Clusters", variable=self.var_hydrophobic_clusters,
@@ -38,29 +41,30 @@ class ContactType:
         self.check_HC.grid(row=2, column=0, sticky='w', padx=10)
         self.check_HB.grid(row=3, column=0, sticky='w', padx=10)
 
-        # Bottone per selezionare i file e avviare i calcolatori
+        # Bottone di selezione dei file, inizialmente disabilitato
         self.button_select = customtkinter.CTkButton(self.frame, text="Select", command=self.open_file_selectors,
                                                      state="disabled", font=("Helvetica", 40),
-                                                     fg_color="#333333",  # Dark color for button
-                                                     hover_color="#555555", width=200)  # Slightly lighter hover color
+                                                     fg_color="#333333",  # Colore scuro per il bottone
+                                                     hover_color="#555555", width=200)  # Colore hover leggermente più chiaro
         self.button_select.grid(row=4, column=0, columnspan=3, pady=20)
 
+        # Label per eventuali risultati (inizialmente vuota)
         self.label_result = customtkinter.CTkLabel(self.frame, text="", font=("Helvetica", 40), fg_color='LightSkyBlue1', text_color="#000000")
         self.label_result.grid(row=5, column=0, columnspan=3, pady=10)
 
-        # Aggiungi campi per memorizzare file
+        # Variabili per memorizzare i file selezionati
         self.topology_file = None
         self.trajectory_file = None
         self.output_directory = None
 
-    # Aggiorna lo stato del bottone Select
+    # Abilita/disabilita il bottone "Select" in base ai checkbox selezionati
     def update_button_state(self):
         if self.var_salt_bridges.get() or self.var_hydrophobic_clusters.get() or self.var_hydrogen_bonds.get():
-            self.button_select.configure(state="normal")
+            self.button_select.configure(state="normal")  # Abilita bottone se almeno un'opzione è selezionata
         else:
-            self.button_select.configure(state="disabled")
+            self.button_select.configure(state="disabled")  # Disabilita bottone se nessuna opzione è selezionata
 
-    # Funzione per aprire i file di topologia, traiettoria e la cartella di output
+    # Apre i dialoghi per selezionare file di topologia, traiettoria e cartella di output
     def open_file_selectors(self):
         self.topology_file = filedialog.askopenfilename(title="Select the topology file",
                                                         filetypes=[("PDB files", "*.pdb"), ("GRO files", "*.gro")])
@@ -69,11 +73,11 @@ class ContactType:
                                                                      ("DCD files", "*.dcd")])
         self.output_directory = filedialog.askdirectory(title="Select Output Directory")
 
-        # Apri i calcolatori selezionati
+        # Se tutti i file sono stati selezionati, avvia i calcolatori
         if self.topology_file and self.trajectory_file and self.output_directory:
             self.open_contact_calculators()
 
-    # Funzione per aprire le finestre dei calcolatori selezionati
+    # Avvia i calcolatori corrispondenti ai checkbox selezionati
     def open_contact_calculators(self):
         if self.var_salt_bridges.get() and self.var_hydrophobic_clusters.get() and self.var_hydrogen_bonds.get():
             self.open_calculator(ContactCalculatorSb)
@@ -101,16 +105,18 @@ class ContactType:
         elif self.var_hydrogen_bonds.get():
             self.open_calculator(ContactCalculatorHb)
 
-    # Funzione per aprire una nuova finestra del calcolatore
+    # Crea una nuova finestra per eseguire il calcolatore selezionato
     def open_calculator(self, calculator_class):
-        new_window = customtkinter.CTkToplevel(self.root)
+        new_window = customtkinter.CTkToplevel(self.root)  # Crea una nuova finestra
         calculator = calculator_class(new_window, self.topology_file, self.trajectory_file, self.output_directory)
 
 
 if __name__ == "__main__":
-    customtkinter.set_appearance_mode("dark")  # Modalità scura
-    customtkinter.set_default_color_theme("blue")  # Tema verde
+    # Imposta il tema e l'aspetto dell'interfaccia
+    customtkinter.set_appearance_mode("dark")
+    customtkinter.set_default_color_theme("blue")
 
     root = customtkinter.CTk()
     app = ContactType(root)
     root.mainloop()
+
